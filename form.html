@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Form</title>
+</head>
+<body>
+    
+    <form>
+    <fieldset>
+    <legend>My Form</legend>
+    <label for="fname">First Name</label><br>
+    <input type="text" name="fname"><br><br>
+
+    <label for="email">Email</label><br>
+    <input type="email"><br><br>
+
+    <label for="pwd">Password</label><br>
+    <input type="password"><br><br>
+</fieldset>
+
+    <fieldset>
+        <legend>Gender</legend>
+        <input type="radio" name="gender" value="male" >
+        <label for="male">Male</label><br>
+
+        <input type="radio" name="gender" value="female">
+        <label for="female">Female</label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Interests</legend>
+        <input type="checkbox" name="interests" value="cooking">
+        <label for="cooking">Cooking</label><br>
+
+        <input type="checkbox" name="interests" value="playing">
+        <label for="playing">Playing</label><br>
+
+        <input type="checkbox" id="reading" name="interests" value="reading">
+        <label for="reading">Reading</label>
+    </fieldset>
+    <br>
+
+    <fieldset>
+        <legend>Country</legend>
+        <label for="country">Select your country:</label>
+        <select name="country">
+            <option value="tanzania">Tanzania</option>
+            <option value="somalia">somalia</option>
+            <option value="Libya">libya</option>
+            <option value="burundi">Burundi</option>
+        </select>
+    </fieldset>
+    <br>
+
+    <button type="submit" id="ok">submit</button>
+    
+</form>
+
+<h2>The difference between GET and POST methods in forms is :</h2>
+<p>GET is used for retrieving data to the server WHILE POST is used for sending sensitive or large amounts of data to the server.</p>
+<h2>when a form is submitted without a required input the following happen :</h2>
+<p>The form submission is prevented until all required fields are properly filled.</p>
+</body>
+</html>
