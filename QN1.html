@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM VALIDATION</title>
+    <style>
+         body {
+      font-family: 'Times New Roman', Times, serif;
+      background-color: #c7c4c4;
+      padding: 19px;
+    }
+
+    .form-container {
+      max-width: 500px;
+      background-color: #a5a3a3;
+      padding: 20px 30px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+     label {
+      display: block;
+      margin-top: 15px;
+    }
+
+     input[type="text"], input[type="email"], input[type="password"], textarea, select {
+      width: 90%;
+      padding: 9px;
+      margin-top: 4px;
+      border: 1px solid #9e9a9a;
+      border-radius: 5px;
+    }
+
+    .gender, .prefs {
+      margin-top: 10px;
+    }
+
+     .prefs label {
+      margin-right: 15px;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .buttons input {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      margin: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      font-weight: bold;
+    }
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Test JavaScript Form Validation</h2>
+        <form id="testForm" onsubmit="return validateForm()">
+      <label>Name* 
+        <input type="text" id="name" maxlength="20">
+    </label>
+      <span class="error" id="nameError"></span>
+
+      <label>Address 
+        <textarea id="address" rows="3"></textarea>
+    </label>
+
+      <label>Zip Code* <input type="text" id="zip"></label>
+      <span class="error" id="zipError"></span>
+
+      <label>Country*
+        <select id="country">
+          <option value="">Please select...</option>
+          <option value="Ethiopia">Ethiopia</option>
+          <option value="Egypt">Egypt</option>
+          <option value="Libya">Libya</option>
+        </select>
+      </label>
+      <span class="error" id="countryError"></span>
+
+      <label>Gender*</label>
+      <div class="gender">
+        <input type="radio" name="gender" value="male"> Male
+        <input type="radio" name="gender" value="female"> Female
+      </div>
+      <span class="error" id="genderError"></span>
+
+      <label>Preferences*</label>
+      <div class="prefs">
+        <label>
+            <input type="checkbox" name="prefs" value="Red"> Red</label>
+        <label>
+            <input type="checkbox" name="prefs" value="Green"> Green</label>
+        <label>
+            <input type="checkbox" name="prefs" value="Blue"> Blue</label>
+      </div>
+      <span class="error" id="prefsError"></span>
+
+      <label>Phone* <input type="text" id="phone"></label>
+      <span class="error" id="phoneError"></span>
+
+      <label>Email* 
+        <input type="email" id="email">
+    </label>
+      <span class="error" id="emailError"></span>
+
+      <label>Password (6-8 characters)* 
+        <input type="password" id="password">
+    </label>
+      <span class="error" id="passwordError"></span>
+
+      <label>Verify Password* 
+        <input type="password" id="confirmPassword">
+    </label>
+      <span class="error" id="confirmError"></span>
+
+      <div class="buttons">
+        <input type="submit" value="SEND">
+        <input type="reset" value="CLEAR">
+      </div>
+      <div id="result" class="success"></div>
+    </form>
+  </div>
+
+    <script>
+    function validateForm() {
+      let valid = true;
+
+      // Clear previous errors
+      document.querySelectorAll(".error").forEach(el => el.innerText = '');
+      document.getElementById("result").innerText = '';
+
+      const name = document.getElementById("name").value.trim();
+      const zip = document.getElementById("zip").value.trim();
+      const country = document.getElementById("country").value;
+      const gender = document.querySelector('input[name="gender"]:checked');
+      const prefs = document.querySelectorAll('input[name="prefs"]:checked');
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      // Name validation
+      if (name === "") {
+        document.getElementById("nameError").innerText = "Please enter your name!";
+        valid = false;
+      }
+
+      // Zip validation
+      if (zip === "") {
+        document.getElementById("zipError").innerText = "Please enter Zip Code!";
+        valid = false;
+      }
+
+      // Country
+      if (country === "") {
+        document.getElementById("countryError").innerText = "Please select your country!";
+        valid = false;
+      }
+
+      // Gender
+      if (!gender) {
+        document.getElementById("genderError").innerText = "Please select gender!";
+        valid = false;
+      }
+
+      // Preferences
+      if (prefs.length < 2) {
+        document.getElementById("prefsError").innerText = "Select at least 2 preferences!";
+        valid = false;
+      }
+
+      // Phone
+      if (phone === "") {
+        document.getElementById("phoneError").innerText = "Please enter phone!";
+        valid = false;
+      } else if (!/^\d{10}$/.test(phone)) {
+        document.getElementById("phoneError").innerText = "Phone must be 10 digits!";
+        valid = false;
+      }
+
+      // Email
+      if (email === "") {
+        document.getElementById("emailError").innerText = "Please enter email!";
+        valid = false;
+      } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById("emailError").innerText = "Invalid email format!";
+        valid = false;
+      }
+
+      // Password
+      if (password.length < 6 || password.length > 8) {
+        document.getElementById("passwordError").innerText = "Password must be 6 to 8 characters!";
+        valid = false;
+      }
+
+      // Confirm Password
+      if (confirmPassword !== password) {
+        document.getElementById("confirmError").innerText = "Passwords do not match!";
+        valid = false;
+      }
+
+      if (valid) {
+        document.getElementById("result").innerText = "Form submitted successfully!";
+      }
+
+      return valid;
+    }
+  </script>
+</body>
+</html>
